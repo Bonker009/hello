@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Project Deadline Countdown</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ffc1cc, #ffe4ec);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .countdown {
+      background-color: #fff0f6;
+      padding: 40px 60px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(255, 105, 180, 0.3);
+      text-align: center;
+      border: 2px solid #ff99cc;
+    }
+
+    .logo {
+      max-width: 120px;
+      margin-bottom: 20px;
+    }
+
+    .countdown h1 {
+      margin-bottom: 25px;
+      font-size: 26px;
+      color: #d63384;
+    }
+
+    .time {
+      font-size: 40px;
+      font-weight: bold;
+      color: #ff69b4;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: inset 0 0 8px rgba(255, 182, 193, 0.5);
+      display: inline-block;
+      min-width: 300px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="countdown">
+  <!-- Logo at the top -->
+  <img src="logo.png" alt="Project Logo" class="logo">
+  
+  <h1>Time Remaining Until Project Deadline 💪</h1>
+  <div class="time" id="timer">Loading...</div>
+</div>
+
+<script>
+  const countdown = () => {
+    const deadline = new Date("April 9, 2025 06:00:00").getTime();
+    const now = new Date().getTime();
+    const difference = deadline - now;
+
+    if (difference <= 0) {
+      document.getElementById("timer").innerHTML = "🎉 Deadline Passed!";
+      clearInterval(intervalId);
+      return;
+    }
+
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+    document.getElementById("timer").innerHTML =
+      `${days}d ${hours}h ${minutes}m ${seconds}s`;
+  };
+
+  const intervalId = setInterval(countdown, 1000);
+  countdown(); // Initial call
+</script>
+
+</body>
+</html>
